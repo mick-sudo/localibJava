@@ -1,5 +1,7 @@
 package com.incubateur.localibjava.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,30 +20,31 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column
+
     private String brand;
 
-    @Column
+
     private String model;
 
-    @Column
+
     private String registration;
 
-    @Column(length = 1)
+
     private String vehicleCondition;
 
-    @Column(length = 3)
-    private int pricePerDay;
 
-    @Column
+    private Long pricePerDay;
+
+
     private boolean available;
 
     @OneToMany(
             mappedBy = "car",
             cascade = CascadeType.ALL
     )
-    private List<Location> cars = new ArrayList<>();
+    @JsonIgnoreProperties("car")
+    private List<Location> carsLocation = new ArrayList<>();
 
 }

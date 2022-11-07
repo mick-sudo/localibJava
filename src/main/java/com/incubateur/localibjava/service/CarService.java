@@ -3,16 +3,18 @@ package com.incubateur.localibjava.service;
 import com.incubateur.localibjava.model.Car;
 import com.incubateur.localibjava.repository.CarRepository;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Data
+
 @Service
+@RequiredArgsConstructor
 public class CarService {
-    @Autowired
-    private CarRepository carRepository;
+
+    private final CarRepository carRepository;
 
     public Car addCar(Car car) {
         return carRepository.save(car);
