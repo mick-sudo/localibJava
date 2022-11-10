@@ -1,7 +1,9 @@
 package com.incubateur.localibjava.service;
 
+import com.incubateur.localibjava.dto.CarLocationDto;
 import com.incubateur.localibjava.model.Car;
 import com.incubateur.localibjava.repository.CarRepository;
+import com.incubateur.localibjava.repository.LocationRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CarService {
-
     private final CarRepository carRepository;
 
     public Car addCar(Car car) {
@@ -41,4 +42,6 @@ public class CarService {
                     return carRepository.save(c);
                         }).orElseThrow(() -> new RuntimeException("Customer not found"));
     }
+
+
 }

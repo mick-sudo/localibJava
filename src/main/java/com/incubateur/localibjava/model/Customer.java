@@ -1,5 +1,6 @@
 package com.incubateur.localibjava.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,10 +34,10 @@ public class Customer {
 
     private String phone;
 
-   /* @OneToMany(
+    @OneToMany(
             mappedBy = "customer",
             cascade = CascadeType.ALL
     )
-    @JsonIgnoreProperties("customer")
-    private List<Location> customersLocation = new ArrayList<>();*/
+    @JsonIgnoreProperties({"customer", "car"})
+    private List<Location> customersLocation = new ArrayList<>();
 }
