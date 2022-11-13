@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/customers")
@@ -24,13 +25,14 @@ public class CustomerController {
         return customerService.getAllCustomer();
     }
 
+
     @DeleteMapping("delete/{id}")
-    public String deleteCustomer(@PathVariable Integer id){
+    public String deleteCustomer(@PathVariable Long id){
        return customerService.deleteCustomerById(id);
     }
 
     @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable Integer id,@RequestBody Customer customer){
+    public Customer updateCustomer(@PathVariable Long id,@RequestBody Customer customer){
         return customerService.updateCustomerById(id, customer);
     }
 }

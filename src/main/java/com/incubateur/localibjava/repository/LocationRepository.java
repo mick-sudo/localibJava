@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LocationRepository extends JpaRepository<Location, Integer> {
+public interface LocationRepository extends JpaRepository<Location, Long> {
 }

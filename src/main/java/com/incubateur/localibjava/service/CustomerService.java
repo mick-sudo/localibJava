@@ -2,9 +2,7 @@ package com.incubateur.localibjava.service;
 
 import com.incubateur.localibjava.model.Customer;
 import com.incubateur.localibjava.repository.CustomerRepository;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,13 +23,13 @@ public class CustomerService {
         return (List<Customer>) customerRepository.findAll();
     }
 
-    public String deleteCustomerById(Integer id) {
+    public String deleteCustomerById(Long id) {
         customerRepository.deleteById(id);
         return "Customer remove";
     }
 
 
-    public Customer updateCustomerById(Integer id, Customer customer) {
+    public Customer updateCustomerById(Long id, Customer customer) {
         return customerRepository.findById(id)
                 .map(c-> {
             c.setFirstName(customer.getFirstName());
@@ -42,4 +40,5 @@ public class CustomerService {
             return customerRepository.save(c);
         }).orElseThrow(() -> new RuntimeException("Customer not found"));
     }
+
 }

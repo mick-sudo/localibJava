@@ -31,12 +31,12 @@ public class CarController {
 
 
     @DeleteMapping("delete/{id}")
-    public String deleteCar(@PathVariable Integer id){
+    public String deleteCar(@PathVariable Long id){
         return carService.deleteCarById(id);
     }
 
     @PutMapping("/{id}")
-    public Car updateCar(@PathVariable Integer id, @RequestBody Car car){
+    public Car updateCar(@PathVariable Long id, @RequestBody Car car){
         return carService.updateCarById(id, car);
     }
 

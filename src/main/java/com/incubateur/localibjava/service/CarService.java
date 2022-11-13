@@ -25,12 +25,12 @@ public class CarService {
         return (List<Car>) carRepository.findAll();
     }
 
-    public String deleteCarById(Integer id) {
+    public String deleteCarById(Long id) {
         carRepository.deleteById(id);
         return "car removed";
     }
 
-    public Car updateCarById(Integer id, Car car) {
+    public Car updateCarById(Long id, Car car) {
         return carRepository.findById(id)
                 .map(c->{
                     c.setBrand(car.getBrand());
