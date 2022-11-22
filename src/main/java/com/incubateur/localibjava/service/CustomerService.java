@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -41,4 +42,7 @@ public class CustomerService {
         }).orElseThrow(() -> new RuntimeException("Customer not found"));
     }
 
+    public Optional<Customer> findCustomerById(Long id) {
+        return customerRepository.findById(id);
+    }
 }

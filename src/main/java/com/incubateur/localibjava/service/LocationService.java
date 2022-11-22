@@ -3,24 +3,33 @@ package com.incubateur.localibjava.service;
 import com.incubateur.localibjava.dto.CarLocationDto;
 import com.incubateur.localibjava.model.Car;
 import com.incubateur.localibjava.model.Location;
+import com.incubateur.localibjava.repository.CarRepository;
 import com.incubateur.localibjava.repository.LocationRepository;
-import lombok.Data;
+import com.sun.jdi.JDIPermission;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class LocationService {
 
-
+    private final CarRepository carRepository;
     private final LocationRepository locationRepository;
 
     public Location addLocation(Location location) {
-        return locationRepository.save(location);
+        if(location.getCar().isAvailable()){
+            return locationRepository.save(location);
+        }else {
+            return null;
+        }
+
     }
 
     public List<Location> getAllLocation() {
@@ -42,5 +51,28 @@ public class LocationService {
         carLocationDto.setStartLocation(location.getStartLocation());
         carLocationDto.setEndLocation(location.getEndLocation());
         return  carLocationDto;
+    }
+
+    public Boolean carsAvailable(Long carId, Date startLocation, Date endLocation){
+        Optional<Car> car = carRepository.findById(carId);
+        AtomicReference<Boolean> dispo = new AtomicReference<>(true);
+        if(car.isPresent()){
+           List<Location> carLocation = car.get().getCarsLocation();
+           carLocation.forEach(location -> {
+               if(!(startLocation.after(location.getEndLocation()) || endLocation.before(location.getStartLocation()))){
+                   dispo.set(false);
+               }
+           });
+        }
+        return dispo.get();
+    }
+
+    public long carsInvoice(Location location){
+            long startLocation = location.getStartLocation().getTime();
+            long endLocation = location.getEndLocation().getTime();
+            long duration = (endLocation - startLocation) / (1000 * 60 * 60 * 24);
+            long price = location.getCar().getPricePerDay();
+            long invoice = duration * price;
+            return invoice;
     }
 }

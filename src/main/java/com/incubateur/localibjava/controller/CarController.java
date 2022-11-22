@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/cars")
@@ -29,6 +30,8 @@ public class CarController {
         return carService.getAllCars();
     }
 
+    @GetMapping("/{id}")
+    public Optional<Car> carsById(@PathVariable Long id){return carService.getCarById(id);}
 
     @DeleteMapping("delete/{id}")
     public String deleteCar(@PathVariable Long id){

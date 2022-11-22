@@ -25,6 +25,9 @@ public class CustomerController {
         return customerService.getAllCustomer();
     }
 
+    @GetMapping("/{id}")
+    public Optional<Customer> customerById(@PathVariable Long id){ return customerService.findCustomerById(id);}
+
 
     @DeleteMapping("delete/{id}")
     public String deleteCustomer(@PathVariable Long id){

@@ -25,12 +25,9 @@ public class Customer {
     @Column(length = 10)
     private String lastName;
 
-
     private Date birthday;
 
-
     private String email;
-
 
     private String phone;
 

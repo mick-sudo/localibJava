@@ -1,6 +1,5 @@
 package com.incubateur.localibjava.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,21 +21,15 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String brand;
-
 
     private String model;
 
-
     private String registration;
-
 
     private String vehicleCondition;
 
-
     private Long pricePerDay;
-
 
     private boolean available;
 

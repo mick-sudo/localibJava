@@ -1,17 +1,15 @@
 package com.incubateur.localibjava.dto;
 
-import com.incubateur.localibjava.model.Location;
 import lombok.*;
 
-import javax.persistence.Column;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
 @Builder
 @Getter@Setter@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class CarLocationDto {
+    private Long carId;
     private String brand;
     private String model;
     private String registration;
